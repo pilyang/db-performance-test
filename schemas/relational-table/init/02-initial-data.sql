@@ -27,19 +27,25 @@ SELECT
     'Article ' || generate_series || ' ' || md5(random()::text)
 FROM generate_series(1, 100000);
 
--- article_tags 관계 데이터 생성 (수정된 버전)
-WITH RECURSIVE article_tags_random AS (
+-- article_tags 관계 데이터 생성
+WITH article_numbers AS (
     SELECT 
         a.id as article_id,
+        row_number() OVER (ORDER BY a.id) as num
+    FROM articles a
+),
+article_tags_random AS (
+    SELECT 
+        an.article_id,
         (SELECT array_agg(id)
          FROM (
              SELECT id
              FROM tags
-             ORDER BY random()
+             ORDER BY random() * an.num
              LIMIT 3 + (random() < 0.5)::int
          ) t
         ) as tag_ids
-    FROM articles a
+    FROM article_numbers an
 )
 INSERT INTO article_tags (article_id, tag_id)
 SELECT article_id, unnest(tag_ids)
@@ -52,4 +58,4 @@ SELECT
 FROM article_tags
 GROUP BY article_id
 ORDER BY article_id
-LIMIT 5;
+LIMIT 10;
