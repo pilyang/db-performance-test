@@ -1,0 +1,814 @@
+
+=== Testing TEXT[] Array (Port: 5433) ===
+==================================================
+
+Executing: Single Tag Search
+------------------------------
+Run 1:
+  Execution Time: 4.862ms
+  Planning Time: 182µs
+  Total Time: 6.445042ms
+  Rows: 3497
+Run 2:
+  Execution Time: 6.095ms
+  Planning Time: 235µs
+  Total Time: 7.783667ms
+  Rows: 3497
+Run 3:
+  Execution Time: 4.263ms
+  Planning Time: 247µs
+  Total Time: 6.264084ms
+  Rows: 3497
+Run 4:
+  Execution Time: 7.372ms
+  Planning Time: 165µs
+  Total Time: 8.972583ms
+  Rows: 3497
+Run 5:
+  Execution Time: 3.847ms
+  Planning Time: 147µs
+  Total Time: 5.197792ms
+  Rows: 3497
+Run 6:
+  Execution Time: 5.879ms
+  Planning Time: 198µs
+  Total Time: 7.454458ms
+  Rows: 3497
+Run 7:
+  Execution Time: 4.017ms
+  Planning Time: 130µs
+  Total Time: 5.467625ms
+  Rows: 3497
+Run 8:
+  Execution Time: 6.372ms
+  Planning Time: 139µs
+  Total Time: 8.2345ms
+  Rows: 3497
+Run 9:
+  Execution Time: 5.891ms
+  Planning Time: 211µs
+  Total Time: 7.685625ms
+  Rows: 3497
+Run 10:
+  Execution Time: 6.138ms
+  Planning Time: 181µs
+  Total Time: 8.002417ms
+  Rows: 3497
+
+Summary for Single Tag Search:
+------------------------------
+Average Execution Time: 5.4736ms
+Average Planning Time: 183.5µs
+Average Total Time: 7.150779ms
+Average Row Count: 3497
+Min Execution Time: 3.847ms
+Max Execution Time: 7.372ms
+
+Query Plan (first run):
+Bitmap Heap Scan on articles_with_text_array  (cost=35.27..1880.21 rows=3497 width=114) (actual time=1.236..4.511 rows=3546 loops=1)
+  Recheck Cond: (tag_values @> '{javascript}'::text[])
+  Heap Blocks: exact=1555
+  Buffers: shared hit=1559
+  ->  Bitmap Index Scan on idx_articles_text_array_tags  (cost=0.00..34.40 rows=3497 width=0) (actual time=0.910..0.911 rows=3546 loops=1)
+        Index Cond: (tag_values @> '{javascript}'::text[])
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=1
+Planning Time: 0.182 ms
+Execution Time: 4.862 ms
+
+Executing: Multiple Tags AND
+------------------------------
+Run 1:
+  Execution Time: 243µs
+  Planning Time: 255µs
+  Total Time: 2.099958ms
+  Rows: 17
+Run 2:
+  Execution Time: 111µs
+  Planning Time: 200µs
+  Total Time: 1.533917ms
+  Rows: 17
+Run 3:
+  Execution Time: 114µs
+  Planning Time: 165µs
+  Total Time: 1.583584ms
+  Rows: 17
+Run 4:
+  Execution Time: 64µs
+  Planning Time: 135µs
+  Total Time: 1.578125ms
+  Rows: 17
+Run 5:
+  Execution Time: 114µs
+  Planning Time: 212µs
+  Total Time: 1.824875ms
+  Rows: 17
+Run 6:
+  Execution Time: 91µs
+  Planning Time: 241µs
+  Total Time: 1.668958ms
+  Rows: 17
+Run 7:
+  Execution Time: 130µs
+  Planning Time: 273µs
+  Total Time: 2.136375ms
+  Rows: 17
+Run 8:
+  Execution Time: 107µs
+  Planning Time: 192µs
+  Total Time: 1.654459ms
+  Rows: 17
+Run 9:
+  Execution Time: 97µs
+  Planning Time: 170µs
+  Total Time: 1.624208ms
+  Rows: 17
+Run 10:
+  Execution Time: 118µs
+  Planning Time: 167µs
+  Total Time: 1.559458ms
+  Rows: 17
+
+Summary for Multiple Tags AND:
+------------------------------
+Average Execution Time: 118.9µs
+Average Planning Time: 201µs
+Average Total Time: 1.726391ms
+Average Row Count: 17
+Min Execution Time: 64µs
+Max Execution Time: 243µs
+
+Query Plan (first run):
+Bitmap Heap Scan on articles_with_text_array  (cost=25.67..88.91 rows=17 width=114) (actual time=0.096..0.098 rows=0 loops=1)
+  Recheck Cond: (tag_values @> '{javascript,jeact}'::text[])
+  Buffers: shared hit=6
+  ->  Bitmap Index Scan on idx_articles_text_array_tags  (cost=0.00..25.66 rows=17 width=0) (actual time=0.090..0.091 rows=0 loops=1)
+        Index Cond: (tag_values @> '{javascript,jeact}'::text[])
+        Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=1
+Planning Time: 0.255 ms
+Execution Time: 0.243 ms
+
+Executing: Multiple Tags OR
+------------------------------
+Run 1:
+  Execution Time: 9.517ms
+  Planning Time: 151µs
+  Total Time: 11.23075ms
+  Rows: 6855
+Run 2:
+  Execution Time: 9.433ms
+  Planning Time: 128µs
+  Total Time: 10.883083ms
+  Rows: 6855
+Run 3:
+  Execution Time: 7.492ms
+  Planning Time: 166µs
+  Total Time: 9.163959ms
+  Rows: 6855
+Run 4:
+  Execution Time: 6.557ms
+  Planning Time: 193µs
+  Total Time: 8.513541ms
+  Rows: 6855
+Run 5:
+  Execution Time: 7.052ms
+  Planning Time: 127µs
+  Total Time: 8.373875ms
+  Rows: 6855
+Run 6:
+  Execution Time: 9.673ms
+  Planning Time: 159µs
+  Total Time: 14.112125ms
+  Rows: 6855
+Run 7:
+  Execution Time: 9.677ms
+  Planning Time: 164µs
+  Total Time: 12.145833ms
+  Rows: 6855
+Run 8:
+  Execution Time: 9.375ms
+  Planning Time: 123µs
+  Total Time: 11.318083ms
+  Rows: 6855
+Run 9:
+  Execution Time: 8.898ms
+  Planning Time: 164µs
+  Total Time: 10.804541ms
+  Rows: 6855
+Run 10:
+  Execution Time: 8.109ms
+  Planning Time: 128µs
+  Total Time: 9.588709ms
+  Rows: 6855
+
+Summary for Multiple Tags OR:
+------------------------------
+Average Execution Time: 8.5783ms
+Average Planning Time: 150.3µs
+Average Total Time: 10.613449ms
+Average Row Count: 6855
+Min Execution Time: 6.557ms
+Max Execution Time: 9.677ms
+
+Query Plan (first run):
+Bitmap Heap Scan on articles_with_text_array  (cost=65.69..1942.38 rows=6855 width=114) (actual time=2.911..8.724 rows=7012 loops=1)
+  Recheck Cond: (tag_values && '{javascript,python}'::text[])
+  Heap Blocks: exact=1771
+  Buffers: shared hit=1778
+  ->  Bitmap Index Scan on idx_articles_text_array_tags  (cost=0.00..63.97 rows=6855 width=0) (actual time=2.374..2.375 rows=7012 loops=1)
+        Index Cond: (tag_values && '{javascript,python}'::text[])
+        Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=1
+Planning Time: 0.151 ms
+Execution Time: 9.517 ms
+
+=== Overall Summary for TEXT[] Array ===
+==================================================
+
+Single Tag Search:
+  Avg Execution Time: 5.4736ms
+  Avg Planning Time: 183.5µs
+  Execution Time Range: 3.847ms - 7.372ms
+
+Multiple Tags AND:
+  Avg Execution Time: 118.9µs
+  Avg Planning Time: 201µs
+  Execution Time Range: 64µs - 243µs
+
+Multiple Tags OR:
+  Avg Execution Time: 8.5783ms
+  Avg Planning Time: 150.3µs
+  Execution Time Range: 6.557ms - 9.677ms
+
+=== Testing INTEGER[] Array (Port: 5434) ===
+==================================================
+
+Executing: Single Tag Search
+------------------------------
+Run 1:
+  Execution Time: 5.13ms
+  Planning Time: 217µs
+  Total Time: 7.04775ms
+  Rows: 500
+Run 2:
+  Execution Time: 4.685ms
+  Planning Time: 212µs
+  Total Time: 6.283ms
+  Rows: 500
+Run 3:
+  Execution Time: 4.414ms
+  Planning Time: 177µs
+  Total Time: 6.664625ms
+  Rows: 500
+Run 4:
+  Execution Time: 6.607ms
+  Planning Time: 185µs
+  Total Time: 8.707125ms
+  Rows: 500
+Run 5:
+  Execution Time: 4.928ms
+  Planning Time: 147µs
+  Total Time: 6.484709ms
+  Rows: 500
+Run 6:
+  Execution Time: 4.299ms
+  Planning Time: 119µs
+  Total Time: 5.642917ms
+  Rows: 500
+Run 7:
+  Execution Time: 3.194ms
+  Planning Time: 154µs
+  Total Time: 4.364666ms
+  Rows: 500
+Run 8:
+  Execution Time: 3.121ms
+  Planning Time: 117µs
+  Total Time: 4.428458ms
+  Rows: 500
+Run 9:
+  Execution Time: 2.72ms
+  Planning Time: 103µs
+  Total Time: 3.706959ms
+  Rows: 500
+Run 10:
+  Execution Time: 4.64ms
+  Planning Time: 157µs
+  Total Time: 6.257084ms
+  Rows: 500
+
+Summary for Single Tag Search:
+------------------------------
+Average Execution Time: 4.3738ms
+Average Planning Time: 158.8µs
+Average Total Time: 5.958729ms
+Average Row Count: 500
+Min Execution Time: 2.72ms
+Max Execution Time: 6.607ms
+
+Query Plan (first run):
+Bitmap Heap Scan on articles_with_int_array a  (cost=13.41..1025.88 rows=500 width=84) (actual time=1.206..4.703 rows=3537 loops=1)
+  Recheck Cond: (tag_ids @> ARRAY[$0])
+  Heap Blocks: exact=1309
+  Buffers: shared hit=1313
+  InitPlan 1 (returns $0)
+    ->  Seq Scan on tags  (cost=0.00..2.25 rows=1 width=4) (actual time=0.016..0.036 rows=1 loops=1)
+          Filter: ((value)::text = 'javascript'::text)
+          Rows Removed by Filter: 99
+          Buffers: shared hit=1
+  ->  Bitmap Index Scan on idx_articles_int_array_tags  (cost=0.00..11.04 rows=500 width=0) (actual time=0.865..0.866 rows=3537 loops=1)
+        Index Cond: (tag_ids @> ARRAY[$0])
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=1
+Planning Time: 0.217 ms
+Execution Time: 5.130 ms
+
+Executing: Multiple Tags AND
+------------------------------
+Run 1:
+  Execution Time: 695µs
+  Planning Time: 139µs
+  Total Time: 2.290208ms
+  Rows: 500
+Run 2:
+  Execution Time: 1.199ms
+  Planning Time: 187µs
+  Total Time: 2.655333ms
+  Rows: 500
+Run 3:
+  Execution Time: 718µs
+  Planning Time: 205µs
+  Total Time: 2.144333ms
+  Rows: 500
+Run 4:
+  Execution Time: 922µs
+  Planning Time: 167µs
+  Total Time: 3.252333ms
+  Rows: 500
+Run 5:
+  Execution Time: 918µs
+  Planning Time: 217µs
+  Total Time: 2.510041ms
+  Rows: 500
+Run 6:
+  Execution Time: 1.312ms
+  Planning Time: 225µs
+  Total Time: 3.58525ms
+  Rows: 500
+Run 7:
+  Execution Time: 1.407ms
+  Planning Time: 273µs
+  Total Time: 3.440292ms
+  Rows: 500
+Run 8:
+  Execution Time: 1.268ms
+  Planning Time: 171µs
+  Total Time: 2.6575ms
+  Rows: 500
+Run 9:
+  Execution Time: 976µs
+  Planning Time: 247µs
+  Total Time: 2.65625ms
+  Rows: 500
+Run 10:
+  Execution Time: 1.317ms
+  Planning Time: 261µs
+  Total Time: 3.211708ms
+  Rows: 500
+
+Summary for Multiple Tags AND:
+------------------------------
+Average Execution Time: 1.0732ms
+Average Planning Time: 209.2µs
+Average Total Time: 2.840324ms
+Average Row Count: 500
+Min Execution Time: 695µs
+Max Execution Time: 1.407ms
+
+Query Plan (first run):
+Bitmap Heap Scan on articles_with_int_array a  (cost=15.66..1028.13 rows=500 width=84) (actual time=0.494..0.654 rows=99 loops=1)
+  Recheck Cond: (tag_ids @> ARRAY[$0, $1])
+  Heap Blocks: exact=97
+  Buffers: shared hit=105
+  InitPlan 1 (returns $0)
+    ->  Seq Scan on tags  (cost=0.00..2.25 rows=1 width=4) (actual time=0.011..0.021 rows=1 loops=1)
+          Filter: ((value)::text = 'javascript'::text)
+          Rows Removed by Filter: 99
+          Buffers: shared hit=1
+  InitPlan 2 (returns $1)
+    ->  Seq Scan on tags tags_1  (cost=0.00..2.25 rows=1 width=4) (actual time=0.003..0.011 rows=1 loops=1)
+          Filter: ((value)::text = 'react'::text)
+          Rows Removed by Filter: 99
+          Buffers: shared hit=1
+  ->  Bitmap Index Scan on idx_articles_int_array_tags  (cost=0.00..11.04 rows=500 width=0) (actual time=0.477..0.477 rows=99 loops=1)
+        Index Cond: (tag_ids @> ARRAY[$0, $1])
+        Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=1
+Planning Time: 0.139 ms
+Execution Time: 0.695 ms
+
+Executing: Multiple Tags OR
+------------------------------
+Run 1:
+  Execution Time: 6.988ms
+  Planning Time: 197µs
+  Total Time: 8.605542ms
+  Rows: 1000
+Run 2:
+  Execution Time: 6.446ms
+  Planning Time: 318µs
+  Total Time: 8.359459ms
+  Rows: 1000
+Run 3:
+  Execution Time: 5.531ms
+  Planning Time: 173µs
+  Total Time: 8.023583ms
+  Rows: 1000
+Run 4:
+  Execution Time: 9.288ms
+  Planning Time: 211µs
+  Total Time: 11.085541ms
+  Rows: 1000
+Run 5:
+  Execution Time: 7.661ms
+  Planning Time: 298µs
+  Total Time: 10.007959ms
+  Rows: 1000
+Run 6:
+  Execution Time: 7.133ms
+  Planning Time: 158µs
+  Total Time: 8.897125ms
+  Rows: 1000
+Run 7:
+  Execution Time: 8.625ms
+  Planning Time: 234µs
+  Total Time: 10.589916ms
+  Rows: 1000
+Run 8:
+  Execution Time: 9.983ms
+  Planning Time: 245µs
+  Total Time: 12.122042ms
+  Rows: 1000
+Run 9:
+  Execution Time: 8.173ms
+  Planning Time: 169µs
+  Total Time: 9.872083ms
+  Rows: 1000
+Run 10:
+  Execution Time: 7.789ms
+  Planning Time: 181µs
+  Total Time: 9.711417ms
+  Rows: 1000
+
+Summary for Multiple Tags OR:
+------------------------------
+Average Execution Time: 7.7617ms
+Average Planning Time: 218.4µs
+Average Total Time: 9.727466ms
+Average Row Count: 1000
+Min Execution Time: 5.531ms
+Max Execution Time: 9.983ms
+
+Query Plan (first run):
+Bitmap Heap Scan on articles_with_int_array a  (cost=18.29..1394.00 rows=1000 width=84) (actual time=1.885..6.295 rows=7036 loops=1)
+  Recheck Cond: (tag_ids && ARRAY[$0, $1])
+  Heap Blocks: exact=1424
+  Buffers: shared hit=1431
+  InitPlan 1 (returns $0)
+    ->  Seq Scan on tags  (cost=0.00..2.25 rows=1 width=4) (actual time=0.014..0.066 rows=1 loops=1)
+          Filter: ((value)::text = 'javascript'::text)
+          Rows Removed by Filter: 99
+          Buffers: shared hit=1
+  InitPlan 2 (returns $1)
+    ->  Seq Scan on tags tags_1  (cost=0.00..2.25 rows=1 width=4) (actual time=0.005..0.019 rows=1 loops=1)
+          Filter: ((value)::text = 'python'::text)
+          Rows Removed by Filter: 99
+          Buffers: shared hit=1
+  ->  Bitmap Index Scan on idx_articles_int_array_tags  (cost=0.00..13.54 rows=1000 width=0) (actual time=1.662..1.662 rows=7036 loops=1)
+        Index Cond: (tag_ids && ARRAY[$0, $1])
+        Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=1
+Planning Time: 0.197 ms
+Execution Time: 6.988 ms
+
+=== Overall Summary for INTEGER[] Array ===
+==================================================
+
+Single Tag Search:
+  Avg Execution Time: 4.3738ms
+  Avg Planning Time: 158.8µs
+  Execution Time Range: 2.72ms - 6.607ms
+
+Multiple Tags AND:
+  Avg Execution Time: 1.0732ms
+  Avg Planning Time: 209.2µs
+  Execution Time Range: 695µs - 1.407ms
+
+Multiple Tags OR:
+  Avg Execution Time: 7.7617ms
+  Avg Planning Time: 218.4µs
+  Execution Time Range: 5.531ms - 9.983ms
+
+=== Testing Relational Table (Port: 5432) ===
+==================================================
+
+Executing: Single Tag Search
+------------------------------
+Run 1:
+  Execution Time: 19.684ms
+  Planning Time: 831µs
+  Total Time: 21.995583ms
+  Rows: 3499
+Run 2:
+  Execution Time: 19.23ms
+  Planning Time: 769µs
+  Total Time: 21.699584ms
+  Rows: 3499
+Run 3:
+  Execution Time: 17.466ms
+  Planning Time: 1.002999ms
+  Total Time: 19.866917ms
+  Rows: 3499
+Run 4:
+  Execution Time: 16.28ms
+  Planning Time: 901µs
+  Total Time: 18.540792ms
+  Rows: 3499
+Run 5:
+  Execution Time: 16.998ms
+  Planning Time: 523µs
+  Total Time: 18.721291ms
+  Rows: 3499
+Run 6:
+  Execution Time: 21.436ms
+  Planning Time: 886µs
+  Total Time: 23.951417ms
+  Rows: 3499
+Run 7:
+  Execution Time: 16.25ms
+  Planning Time: 533µs
+  Total Time: 18.272625ms
+  Rows: 3499
+Run 8:
+  Execution Time: 21.4ms
+  Planning Time: 786µs
+  Total Time: 23.694083ms
+  Rows: 3499
+Run 9:
+  Execution Time: 13.584ms
+  Planning Time: 509µs
+  Total Time: 15.626375ms
+  Rows: 3499
+Run 10:
+  Execution Time: 17.92ms
+  Planning Time: 644µs
+  Total Time: 19.964208ms
+  Rows: 3499
+
+Summary for Single Tag Search:
+------------------------------
+Average Execution Time: 18.0248ms
+Average Planning Time: 738.499µs
+Average Total Time: 20.233287ms
+Average Row Count: 3499
+Min Execution Time: 13.584ms
+Max Execution Time: 21.436ms
+
+Query Plan (first run):
+HashAggregate  (cost=1297.36..1332.35 rows=3499 width=50) (actual time=18.424..19.370 rows=3555 loops=1)
+  Group Key: a.id, a.title
+  Batches: 1  Memory Usage: 721kB
+  Buffers: shared hit=10679
+  ->  Nested Loop  (cost=0.71..1279.86 rows=3499 width=50) (actual time=0.064..14.478 rows=3555 loops=1)
+        Buffers: shared hit=10679
+        ->  Nested Loop  (cost=0.42..142.90 rows=3499 width=4) (actual time=0.054..1.416 rows=3555 loops=1)
+              Buffers: shared hit=14
+              ->  Seq Scan on tags t  (cost=0.00..2.25 rows=1 width=4) (actual time=0.016..0.045 rows=1 loops=1)
+                    Filter: ((value)::text = 'javascript'::text)
+                    Rows Removed by Filter: 99
+                    Buffers: shared hit=1
+              ->  Index Only Scan using idx_article_tags_tag_article on article_tags at  (cost=0.42..105.65 rows=3499 width=8) (actual time=0.035..0.825 rows=3555 loops=1)
+                    Index Cond: (tag_id = t.id)
+                    Heap Fetches: 0
+                    Buffers: shared hit=13
+        ->  Index Scan using articles_pkey on articles a  (cost=0.29..0.32 rows=1 width=50) (actual time=0.003..0.003 rows=1 loops=3555)
+              Index Cond: (id = at.article_id)
+              Buffers: shared hit=10665
+Planning:
+  Buffers: shared hit=18
+Planning Time: 0.831 ms
+Execution Time: 19.684 ms
+
+Executing: Multiple Tags AND
+------------------------------
+Run 1:
+  Execution Time: 22.761ms
+  Planning Time: 1.22ms
+  Total Time: 27.870334ms
+  Rows: 122
+Run 2:
+  Execution Time: 20.068ms
+  Planning Time: 808µs
+  Total Time: 22.516792ms
+  Rows: 122
+Run 3:
+  Execution Time: 20.54ms
+  Planning Time: 780µs
+  Total Time: 22.855542ms
+  Rows: 122
+Run 4:
+  Execution Time: 21.288ms
+  Planning Time: 1.371ms
+  Total Time: 24.052708ms
+  Rows: 122
+Run 5:
+  Execution Time: 21.949ms
+  Planning Time: 750µs
+  Total Time: 24.322291ms
+  Rows: 122
+Run 6:
+  Execution Time: 21.347ms
+  Planning Time: 1.348ms
+  Total Time: 24.266417ms
+  Rows: 122
+Run 7:
+  Execution Time: 21.822ms
+  Planning Time: 1.523ms
+  Total Time: 25.02625ms
+  Rows: 122
+Run 8:
+  Execution Time: 19.662ms
+  Planning Time: 1.012ms
+  Total Time: 22.030416ms
+  Rows: 122
+Run 9:
+  Execution Time: 19.966ms
+  Planning Time: 1.004ms
+  Total Time: 22.280333ms
+  Rows: 122
+Run 10:
+  Execution Time: 21.301ms
+  Planning Time: 1.395ms
+  Total Time: 24.324375ms
+  Rows: 122
+
+Summary for Multiple Tags AND:
+------------------------------
+Average Execution Time: 21.0704ms
+Average Planning Time: 1.1211ms
+Average Total Time: 23.954545ms
+Average Row Count: 122
+Min Execution Time: 19.662ms
+Max Execution Time: 22.761ms
+
+Query Plan (first run):
+Hash Semi Join  (cost=338.57..1646.16 rows=122 width=50) (actual time=5.455..22.679 rows=91 loops=1)
+  Hash Cond: (a.id = at1.article_id)
+  Buffers: shared hit=10667
+  ->  Nested Loop  (cost=151.94..1448.98 rows=3499 width=54) (actual time=2.508..19.002 rows=3546 loops=1)
+        Buffers: shared hit=10653
+        ->  HashAggregate  (cost=151.64..186.63 rows=3499 width=4) (actual time=2.487..3.301 rows=3546 loops=1)
+              Group Key: at2.article_id
+              Batches: 1  Memory Usage: 369kB
+              Buffers: shared hit=15
+              ->  Nested Loop  (cost=0.42..142.90 rows=3499 width=4) (actual time=0.047..1.219 rows=3546 loops=1)
+                    Buffers: shared hit=15
+                    ->  Seq Scan on tags t2  (cost=0.00..2.25 rows=1 width=4) (actual time=0.013..0.028 rows=1 loops=1)
+                          Filter: ((value)::text = 'react'::text)
+                          Rows Removed by Filter: 99
+                          Buffers: shared hit=1
+                    ->  Index Only Scan using idx_article_tags_tag_article on article_tags at2  (cost=0.42..105.65 rows=3499 width=8) (actual time=0.031..0.662 rows=3546 loops=1)
+                          Index Cond: (tag_id = t2.id)
+                          Heap Fetches: 0
+                          Buffers: shared hit=14
+        ->  Index Scan using articles_pkey on articles a  (cost=0.29..0.36 rows=1 width=50) (actual time=0.004..0.004 rows=1 loops=3546)
+              Index Cond: (id = at2.article_id)
+              Buffers: shared hit=10638
+  ->  Hash  (cost=142.90..142.90 rows=3499 width=4) (actual time=2.543..2.544 rows=3555 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 157kB
+        Buffers: shared hit=14
+        ->  Nested Loop  (cost=0.42..142.90 rows=3499 width=4) (actual time=0.038..1.741 rows=3555 loops=1)
+              Buffers: shared hit=14
+              ->  Seq Scan on tags t1  (cost=0.00..2.25 rows=1 width=4) (actual time=0.014..0.029 rows=1 loops=1)
+                    Filter: ((value)::text = 'javascript'::text)
+                    Rows Removed by Filter: 99
+                    Buffers: shared hit=1
+              ->  Index Only Scan using idx_article_tags_tag_article on article_tags at1  (cost=0.42..105.65 rows=3499 width=8) (actual time=0.021..1.017 rows=3555 loops=1)
+                    Index Cond: (tag_id = t1.id)
+                    Heap Fetches: 0
+                    Buffers: shared hit=13
+Planning:
+  Buffers: shared hit=52
+Planning Time: 1.220 ms
+Execution Time: 22.761 ms
+
+Executing: Multiple Tags OR
+------------------------------
+Run 1:
+  Execution Time: 27.517ms
+  Planning Time: 1.077ms
+  Total Time: 29.860292ms
+  Rows: 6999
+Run 2:
+  Execution Time: 26.171ms
+  Planning Time: 816µs
+  Total Time: 28.206792ms
+  Rows: 6999
+Run 3:
+  Execution Time: 24.14ms
+  Planning Time: 675µs
+  Total Time: 25.806417ms
+  Rows: 6999
+Run 4:
+  Execution Time: 24.448ms
+  Planning Time: 1.289ms
+  Total Time: 27.043209ms
+  Rows: 6999
+Run 5:
+  Execution Time: 25.858ms
+  Planning Time: 737µs
+  Total Time: 27.81125ms
+  Rows: 6999
+Run 6:
+  Execution Time: 26.69ms
+  Planning Time: 456µs
+  Total Time: 28.23025ms
+  Rows: 6999
+Run 7:
+  Execution Time: 21.87ms
+  Planning Time: 936µs
+  Total Time: 23.997958ms
+  Rows: 6999
+Run 8:
+  Execution Time: 21.153ms
+  Planning Time: 497µs
+  Total Time: 22.599791ms
+  Rows: 6999
+Run 9:
+  Execution Time: 24.919ms
+  Planning Time: 627µs
+  Total Time: 26.640958ms
+  Rows: 6999
+Run 10:
+  Execution Time: 25.437ms
+  Planning Time: 631µs
+  Total Time: 27.248167ms
+  Rows: 6999
+
+Summary for Multiple Tags OR:
+------------------------------
+Average Execution Time: 24.8203ms
+Average Planning Time: 774.1µs
+Average Total Time: 26.744508ms
+Average Row Count: 6999
+Min Execution Time: 21.153ms
+Max Execution Time: 27.517ms
+
+Query Plan (first run):
+HashAggregate  (cost=2592.79..2662.78 rows=6999 width=50) (actual time=26.058..27.069 rows=6945 loops=1)
+  Group Key: a.id, a.title
+  Batches: 1  Memory Usage: 1425kB
+  Buffers: shared hit=21155
+  ->  Nested Loop  (cost=0.71..2557.80 rows=6999 width=50) (actual time=0.060..21.014 rows=7043 loops=1)
+        Buffers: shared hit=21155
+        ->  Nested Loop  (cost=0.42..283.54 rows=6999 width=4) (actual time=0.050..2.169 rows=7043 loops=1)
+              Buffers: shared hit=26
+              ->  Seq Scan on tags t  (cost=0.00..2.25 rows=2 width=4) (actual time=0.018..0.038 rows=2 loops=1)
+                    Filter: ((value)::text = ANY ('{javascript,python}'::text[]))
+                    Rows Removed by Filter: 98
+                    Buffers: shared hit=1
+              ->  Index Only Scan using idx_article_tags_tag_article on article_tags at  (cost=0.42..105.65 rows=3499 width=8) (actual time=0.024..0.623 rows=3522 loops=2)
+                    Index Cond: (tag_id = t.id)
+                    Heap Fetches: 0
+                    Buffers: shared hit=25
+        ->  Index Scan using articles_pkey on articles a  (cost=0.29..0.32 rows=1 width=50) (actual time=0.002..0.002 rows=1 loops=7043)
+              Index Cond: (id = at.article_id)
+              Buffers: shared hit=21129
+Planning:
+  Buffers: shared hit=18
+Planning Time: 1.077 ms
+Execution Time: 27.517 ms
+
+=== Overall Summary for Relational Table ===
+==================================================
+
+Single Tag Search:
+  Avg Execution Time: 18.0248ms
+  Avg Planning Time: 738.499µs
+  Execution Time Range: 13.584ms - 21.436ms
+
+Multiple Tags AND:
+  Avg Execution Time: 21.0704ms
+  Avg Planning Time: 1.1211ms
+  Execution Time Range: 19.662ms - 22.761ms
+
+Multiple Tags OR:
+  Avg Execution Time: 24.8203ms
+  Avg Planning Time: 774.1µs
+  Execution Time Range: 21.153ms - 27.517ms
