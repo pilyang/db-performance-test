@@ -292,8 +292,8 @@ func runQueryTest(db *sql.DB, qt QueryTest) *TestSummary {
 	_, _ = executeQuery(db, qt.query)
 	time.Sleep(200 * time.Millisecond)
 
-	// 실제 테스트 실행 (5회)
-	for i := 0; i < 5; i++ {
+	// 실제 테스트 실행 (10회)
+	for i := 0; i < 10; i++ {
 		result, err := executeQuery(db, qt.query)
 		if err != nil {
 			log.Printf("Error executing query: %v\n", err)
@@ -319,7 +319,7 @@ func runQueryTest(db *sql.DB, qt QueryTest) *TestSummary {
 		fmt.Printf("  Total Time: %v\n", result.totalTime)
 		fmt.Printf("  Rows: %d\n", result.rowCount)
 
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(50 * time.Millisecond)
 	}
 
 	// 평균 계산
