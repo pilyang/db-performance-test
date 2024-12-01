@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  db-test:
+    build: ./schemas/relational-table
+    image: test-db:1.0.0
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - testdata:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 256M
+# volumes:
+#   testdata:
