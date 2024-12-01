@@ -22,3 +22,14 @@ services:
         limits:
           cpus: "1"
           memory: 256M
+
+  integer-tag-array-data:
+    build: ./schemas/tag-array-integer
+    image: integer-tag-array-data:1.0.0
+    ports:
+      - "5434:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 256M
