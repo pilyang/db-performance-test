@@ -18,6 +18,5 @@ CREATE TABLE article_tags (
 );
 
 -- 인덱스 생성
-CREATE INDEX idx_articles_title ON articles(title);
 CREATE INDEX idx_tags_value ON tags(value);
 CREATE INDEX idx_article_tags_tag_article ON article_tags(tag_id, article_id);
